@@ -3,10 +3,12 @@ package com.studio.users.controller.json;
 
 import com.studio.users.domain.User;
 import lombok.Builder;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @Builder
+@ToString
 public class UserJson {
 
     private String id;
