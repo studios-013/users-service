@@ -20,7 +20,6 @@ public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
-
     @Autowired
     CreateUser createUser;
 
@@ -35,14 +34,14 @@ public class UserController {
 
     @PostMapping(value = "users")
     public void create(@RequestBody UserJson userJson){
-        log.info("creating an user " + userJson.toString());
-        createUser.execute(userJson.toEntity());
+        User user = createUser.execute(userJson.toEntity());
+        log.info("user '" + user.getName() + "' was created with success and generate id: " + user.getId());
     }
 
     @GetMapping(value = "users")
     public List<UserJson> findAll() {
         List<User> users = findAllUser.execute();
-        log.info("searching all " + users.size() + " users");
+        log.info("searched all " + users.size() + " users");
         return users.stream().map(user -> UserJson.toJson(user))
                 .collect(Collectors.toList());
     }
